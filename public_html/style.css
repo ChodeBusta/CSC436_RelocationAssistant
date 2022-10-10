@@ -1,8 +1,11 @@
+#basicUI{
+    display: none;
+}
 #buttons{
     height:100%;
     width:50%;
     position:absolute;
-    top: 0;
+    top: 10%;
     left: 0;
     background-color: aqua;
 }
@@ -10,7 +13,7 @@
     height:100%;
     width:50%;
     position:absolute;
-    top: 0;
+    top: 10%;
     right: 0;
     background-color: greenyellow;
 }

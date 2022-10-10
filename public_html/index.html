@@ -5,17 +5,21 @@
         <link rel="stylesheet" href="style.css">
         <script src="script.js"></script>
     </head>
-    <body>
-        <!--This is for testing reading, will change to react map-->
-        <div id="buttons">
-            <button class="state" id="AL" onclick="getInfo('alabama')">Alabama</button>
-            <button class="state" id="AK" onclick="getInfo('alaska')">Alaska</button>
-            <button class="state" id="AZ" onclick="getInfo('arizona')">Arizona</button>
-            <button class="state" id="AR" onclick="getInfo('arkansas')">Arkansas</button>
-            <button class="state" id="CA" onclick="getInfo('california')">California</button>
+    <body onload="initialize()">
+        <div id="menu">
+            <button class="menuButton" id="mapUIButton" onclick="chooseUI('map')">Map Version</button>
+            <button class="menuButton" id="basicUIButton" onclick="chooseUI('basic')">Basic Version</button>
         </div>
-        <div id="display">
-            <p>INFO</p>
+        <div id="mapUI">
+
+        </div>
+        <div id="basicUI">
+            <div id="buttons">
+                <p>LOAD FAILED</p>
+            </div>
+            <div id="display">
+                <p>INFO</p>
+            </div>
         </div>
     </body>
 </html>
