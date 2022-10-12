@@ -38,8 +38,43 @@ class Basic extends Component {
     }
 
     handleClick(name) {
-        this.text = name;
-        this.forceUpdate();
+        fetch("http://localhost:80/get/" + name, {method: 'get'})
+            .then(res => res.json())
+            .then(
+                (result) => {
+                this.setState({
+                    isLoaded: true,
+                    items: result.items
+                });
+                this.text = [
+                    result.name,
+                    <br/>,
+                    "Annual Rent: $" + result.rent,
+                    <br/>,
+                    "Electricity: $" + result.electricity,
+                    <br/>,
+                    "Gas: $" + result.gas,
+                    <br/>,
+                    "Water: $" + result.water,
+                    <br/>,
+                    "Sewer: $" + result.sewer,
+                    <br/>,
+                    "Cable: $" + result.cable,
+                    <br/>,
+                    "Internet: $" + result.internet,
+                ];
+                this.forceUpdate();
+                },
+                // Note: it's important to handle errors here
+                // instead of a catch() block so that we don't swallow
+                // exceptions from actual bugs in components.
+                (error) => {
+                this.setState({
+                    isLoaded: true,
+                    error
+                });
+                }
+            )
     }
 
     render () {
