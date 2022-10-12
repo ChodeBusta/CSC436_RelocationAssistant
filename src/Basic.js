@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import * as ReactDOM from 'react-dom';
 
 class Basic extends Component {
     constructor(props) {
@@ -39,12 +38,11 @@ class Basic extends Component {
     }
 
     handleClick(name) {
-        console.log("HERE: " + name);
         this.text = name;
+        this.forceUpdate();
     }
 
     render () {
-        console.log('BRUH: ' + this.text);
         const buttons = this.loopButtons();
         return (
             <div>
