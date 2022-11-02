@@ -29,6 +29,20 @@ var State = mongoose.model('State', StateSchema)
 mongoose.connect(mongoDBURL, { useNewUrlParser: true});
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
+function startUp(){
+    State.find({name: "Alaska"}).exec( function (err, results) {
+        if(err){
+            console.log("Server Error: Problem with Startup")
+        }else if(results.length == 0){
+            console.log("Database does not already exist, initializing database")
+            initializeDB();
+            console.log("Server startup complete")
+        }else{
+            console.log("Server startup complete")
+        }
+    })
+}
+
 function initializeDB(){
     let length = Object.keys(stateData).length; // length should be 50
     for(let i = 0; i < length; i++){
@@ -51,8 +65,9 @@ function initializeDB(){
     }
     console.log("Initialized Database");
 }
-// only use this if this is the first time running it
-//initializeDB();
+
+startUp();
+
 app.get('/get/:stateName', (req, res) => {
     State.findOne({name: req.params.stateName}).exec( (err, result) => {
         if (err || !result){
