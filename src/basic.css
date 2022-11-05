@@ -1,5 +1,24 @@
+#leftButtons { grid-area: LB; }
+#leftResults { grid-area: LR; }
+#leftSalary  { grid-area: LS; }
+#rightButtons{ grid-area: RB; }
+#rightResults{ grid-area: RR; }
+#rightSalary { grid-area: RS; }
+
 #gridContainer{
     display: grid;
-    grid-template-areas: '1 2 3 4';
-    gap: 100px;
+    grid-template-areas: 
+        'LB LS RS RB' 
+        'LB LR RR RB' 
+        'LB LR RR RB' 
+        'LB LR RR RB' 
+        'LB LR RR RB';
+    gap: 10px;
+    padding: 10px;
+}
+#gridContainer > div{
+    background-color: paleturquoise;
+    text-align: center;
+    padding: 30px;
+    font-size: 20px;
 }

@@ -109,11 +109,20 @@ class Basic extends Component {
                 <div id="leftResults">
                     <p>{this.leftText}</p>
                 </div>
+                <div id="leftSalary">
+                    <p>Salary 1</p>
+                </div>
                 <div id="rightResults">
                     <p>{this.rightText}</p>
                 </div>
                 <div id="rightButtons">
                     {rightButtons}
+                </div>
+                <div id="rightResults">
+                    <p>{this.rightText}</p>
+                </div>
+                <div id="rightSalary">
+                    <p>Salary 2</p>
                 </div>
             </div>
         );
