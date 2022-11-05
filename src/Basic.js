@@ -13,32 +13,33 @@ class Basic extends Component {
                         "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio",
                         "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", 
                         "South Dakota", "Tennessee", "Texas", "Utah", "Vermont",
-                        "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"]
-        this.text = "";
+                        "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"];
+        this.leftText = "";
+        this.rightText = "";
     }
 
-    loopButtons() {
+    loopButtons(side) {
         const buttons = [];
         for (let i = 0; i < this.states.length; i++) {
-            buttons.push(this.createButtons(this.states[i]));
+            buttons.push(this.createButtons(this.states[i], side));
         }
         return buttons;
     }
 
-    createButtons(name) {
+    createButtons(name, side) {
         return (
             React.createElement(
                 "button",
                 {
                     key: name,
-                    onClick: () => this.handleClick(name)
+                    onClick: () => this.handleClick(name, side)
                 },
                 name                
             )
         )
     }
 
-    handleClick(name) {
+    handleClick(name, side) {
         fetch("http://localhost:80/get/" + name, {method: 'get'})
             .then(res => res.json())
             .then(
@@ -47,23 +48,42 @@ class Basic extends Component {
                     isLoaded: true,
                     items: result.items
                 });
-                this.text = [
-                    result.name,
-                    <br/>,
-                    "Annual Rent: $" + result.rent,
-                    <br/>,
-                    "Electricity: $" + result.electricity,
-                    <br/>,
-                    "Gas: $" + result.gas,
-                    <br/>,
-                    "Water: $" + result.water,
-                    <br/>,
-                    "Sewer: $" + result.sewer,
-                    <br/>,
-                    "Cable: $" + result.cable,
-                    <br/>,
-                    "Internet: $" + result.internet,
-                ];
+                if(side === "left"){
+                    this.leftText = [result.name,
+                        <br/>,
+                        "Annual Rent: $" + result.rent,
+                        <br/>,
+                        "Electricity: $" + result.electricity,
+                        <br/>,
+                        "Gas: $" + result.gas,
+                        <br/>,
+                        "Water: $" + result.water,
+                        <br/>,
+                        "Sewer: $" + result.sewer,
+                        <br/>,
+                        "Cable: $" + result.cable,
+                        <br/>,
+                        "Internet: $" + result.internet,
+                    ];
+                }else if(side === "right"){
+                    this.rightText = [result.name,
+                        <br/>,
+                        "Annual Rent: $" + result.rent,
+                        <br/>,
+                        "Electricity: $" + result.electricity,
+                        <br/>,
+                        "Gas: $" + result.gas,
+                        <br/>,
+                        "Water: $" + result.water,
+                        <br/>,
+                        "Sewer: $" + result.sewer,
+                        <br/>,
+                        "Cable: $" + result.cable,
+                        <br/>,
+                        "Internet: $" + result.internet,
+                    ];
+                }
+                
                 this.forceUpdate();
                 },
                 // Note: it's important to handle errors here
@@ -79,20 +99,21 @@ class Basic extends Component {
     }
 
     render () {
-        const buttons = this.loopButtons();
+        const leftButtons = this.loopButtons("left");
+        const rightButtons = this.loopButtons("right");
         return (
             <div id="gridContainer">
                 <div id="leftButtons">
-                    {buttons}
+                    {leftButtons}
                 </div>
                 <div id="leftResults">
-                    <p>{this.text}Testing</p>
+                    <p>{this.leftText}</p>
                 </div>
                 <div id="rightResults">
-                    <p>{this.text}Testing</p>
+                    <p>{this.rightText}</p>
                 </div>
                 <div id="rightButtons">
-                    {buttons}
+                    {rightButtons}
                 </div>
             </div>
         );
