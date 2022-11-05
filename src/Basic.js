@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import "./basic.css";
 
 class Basic extends Component {
     constructor(props) {
@@ -80,12 +81,19 @@ class Basic extends Component {
     render () {
         const buttons = this.loopButtons();
         return (
-            <div>
-                <br></br>
+            <div id="gridContainer">
+                <div id="leftButtons">
                     {buttons}
-                <br></br>
-                <br></br>
-                <p>{this.text}</p>
+                </div>
+                <div id="leftResults">
+                    <p>{this.text}Testing</p>
+                </div>
+                <div id="rightResults">
+                    <p>{this.text}Testing</p>
+                </div>
+                <div id="rightButtons">
+                    {buttons}
+                </div>
             </div>
         );
     };
