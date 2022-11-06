@@ -16,6 +16,17 @@ class Basic extends Component {
                         "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"];
         this.leftText = "";
         this.rightText = "";
+        // This is the salary variables, changing the name breaks it
+        this.state = {value: ''};
+        this.validateNumber = this.validateNumber.bind(this);
+        // TODO: Add fields to determine how much something costs
+    }
+
+    validateNumber(e){
+        const re = /^[0-9\b]+$/;
+        if(e.target.value === '' || re.test(e.target.value)){
+            this.setState({value: e.target.value})
+        }
     }
 
     loopButtons(side) {
@@ -49,39 +60,27 @@ class Basic extends Component {
                     items: result.items
                 });
                 if(side === "left"){
-                    this.leftText = [result.name,
-                        <br/>,
-                        "Annual Rent: $" + result.rent,
-                        <br/>,
-                        "Electricity: $" + result.electricity,
-                        <br/>,
-                        "Gas: $" + result.gas,
-                        <br/>,
-                        "Water: $" + result.water,
-                        <br/>,
-                        "Sewer: $" + result.sewer,
-                        <br/>,
-                        "Cable: $" + result.cable,
-                        <br/>,
+                    this.leftText = [result.name,<br/>,
+                        "Annual Rent: $" + result.rent,<br/>,
+                        "Electricity: $" + result.electricity,<br/>,
+                        "Gas: $" + result.gas,<br/>,
+                        "Water: $" + result.water,<br/>,
+                        "Sewer: $" + result.sewer,<br/>,
+                        "Cable: $" + result.cable,<br/>,
                         "Internet: $" + result.internet,
                     ];
+                    //TODO: Update one field to include all costs for state 1
                 }else if(side === "right"){
-                    this.rightText = [result.name,
-                        <br/>,
-                        "Annual Rent: $" + result.rent,
-                        <br/>,
-                        "Electricity: $" + result.electricity,
-                        <br/>,
-                        "Gas: $" + result.gas,
-                        <br/>,
-                        "Water: $" + result.water,
-                        <br/>,
-                        "Sewer: $" + result.sewer,
-                        <br/>,
-                        "Cable: $" + result.cable,
-                        <br/>,
+                    this.rightText = [result.name,<br/>,
+                        "Annual Rent: $" + result.rent,<br/>,
+                        "Electricity: $" + result.electricity,<br/>,
+                        "Gas: $" + result.gas,<br/>,
+                        "Water: $" + result.water,<br/>,
+                        "Sewer: $" + result.sewer,<br/>,
+                        "Cable: $" + result.cable,<br/>,
                         "Internet: $" + result.internet,
                     ];
+                    // TODO: Update one field to include all costs for state 2
                 }
                 
                 this.forceUpdate();
@@ -97,10 +96,16 @@ class Basic extends Component {
                 }
             )
     }
+    // TODO: Add functionality to this.compareSalary() to actually do calculations
+    compareSalary(){
+        const curSalary = this.state.value;
+        return curSalary;
+    }
 
     render () {
         const leftButtons = this.loopButtons("left");
         const rightButtons = this.loopButtons("right");
+        const output = this.compareSalary() 
         return (
             <div id="gridContainer">
                 <div id="leftButtons">
@@ -110,7 +115,7 @@ class Basic extends Component {
                     <p>{this.leftText}</p>
                 </div>
                 <div id="leftSalary">
-                    <p>Salary 1</p>
+                    <input value={this.state.value} onChange={this.validateNumber}/>
                 </div>
                 <div id="rightResults">
                     <p>{this.rightText}</p>
@@ -122,7 +127,7 @@ class Basic extends Component {
                     <p>{this.rightText}</p>
                 </div>
                 <div id="rightSalary">
-                    <p>Salary 2</p>
+                    <input value={output} readOnly/>
                 </div>
             </div>
         );
