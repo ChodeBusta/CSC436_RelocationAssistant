@@ -1,0 +1,23 @@
+#leftResults { grid-area: LR; }
+#leftSalary  { grid-area: LS; }
+#rightResults{ grid-area: RR; }
+#rightSalary { grid-area: RS; }
+
+#gridContainer{
+    display: grid;
+    grid-template-areas: 
+        'LS RS' 
+        'LR RR' 
+        'LR RR' 
+        'LR RR' 
+        'LR RR';
+    gap: 10px;
+    padding: 10px;
+}
+
+#gridContainer > div{
+    background-color: paleturquoise;
+    text-align: center;
+    padding: 30px;
+    font-size: 20px;
+}
