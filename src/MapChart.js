@@ -162,37 +162,25 @@ class MapChart extends Component {
                 items: result.items
             });
             if(side === "left"){
-                this.leftText = [result.name,
-                    <br/>,
-                    "Annual Rent: $" + result.rent,
-                    <br/>,
-                    "Electricity: $" + result.electricity,
-                    <br/>,
-                    "Gas: $" + result.gas,
-                    <br/>,
-                    "Water: $" + result.water,
-                    <br/>,
-                    "Sewer: $" + result.sewer,
-                    <br/>,
-                    "Cable: $" + result.cable,
-                    <br/>,
+                this.leftText = [
+                    result.name,<br/>,
+                    "Annual Rent: $" + result.rent,<br/>,
+                    "Electricity: $" + result.electricity,<br/>,
+                    "Gas: $" + result.gas,<br/>,
+                    "Water: $" + result.water,<br/>,
+                    "Sewer: $" + result.sewer,<br/>,
+                    "Cable: $" + result.cable,<br/>,
                     "Internet: $" + result.internet,
                 ];
             }else if(side === "right"){
-                this.rightText = [result.name,
-                    <br/>,
-                    "Annual Rent: $" + result.rent,
-                    <br/>,
-                    "Electricity: $" + result.electricity,
-                    <br/>,
-                    "Gas: $" + result.gas,
-                    <br/>,
-                    "Water: $" + result.water,
-                    <br/>,
-                    "Sewer: $" + result.sewer,
-                    <br/>,
-                    "Cable: $" + result.cable,
-                    <br/>,
+                this.rightText = [
+                    result.name,<br/>,
+                    "Annual Rent: $" + result.rent,<br/>,
+                    "Electricity: $" + result.electricity,<br/>,
+                    "Gas: $" + result.gas,<br/>,
+                    "Water: $" + result.water,<br/>,
+                    "Sewer: $" + result.sewer,<br/>,
+                    "Cable: $" + result.cable,<br/>,
                     "Internet: $" + result.internet,
                 ];
             }
