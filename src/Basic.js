@@ -69,7 +69,6 @@ class Basic extends Component {
                         "Cable: $" + result.cable,<br/>,
                         "Internet: $" + result.internet,
                     ];
-                    //TODO: Update one field to include all costs for state 1
                 }else if(side === "right"){
                     this.rightText = [result.name,<br/>,
                         "Annual Rent: $" + result.rent,<br/>,
@@ -80,7 +79,6 @@ class Basic extends Component {
                         "Cable: $" + result.cable,<br/>,
                         "Internet: $" + result.internet,
                     ];
-                    // TODO: Update one field to include all costs for state 2
                 }
                 
                 this.forceUpdate();
@@ -96,7 +94,7 @@ class Basic extends Component {
                 }
             )
     }
-    // TODO: Add functionality to this.compareSalary() to actually do calculations
+
     compareSalary(){
         const state1 = (String(this.leftText)).split("$");
         const state2 = (String(this.rightText)).split("$");

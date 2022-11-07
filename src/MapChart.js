@@ -37,6 +37,8 @@ class MapChart extends Component {
         this.geo = [];
         this.leftText = [];
         this.rightText = [];
+        this.state = {value: ''};
+        this.validateNumber = this.validateNumber.bind(this);
         this.id.push(null); this.id.push(null); this.geo.push(null); this.geo.push(null);
     }
 
@@ -99,18 +101,44 @@ class MapChart extends Component {
                     <p>{this.leftText}</p>
                 </div>
                 <div id="leftSalary">
-                    <p>Salary 1</p>
+                <input value={this.state.value} onChange={this.validateNumber}/>
                 </div>
                 <div id="rightResults">
                     <p>{this.rightText}</p>
                 </div>
                 <div id="rightSalary">
-                    <p>Salary 2</p>
+                    <input value={this.compareSalary()} readOnly/>
                 </div>
             </div>
             </>
         );
     };
+
+    validateNumber(e){
+        const re = /^[0-9\b]+$/;
+        if(e.target.value === '' || re.test(e.target.value)){
+            this.setState({value: e.target.value})
+        }
+    }
+
+    compareSalary(){
+        let curSalary = this.state.value;
+        if (this.leftText.length > 1 && this.rightText.length > 1) {
+            let sum1 = 0;
+            let sum2 = 0;
+            for (let i = 2; i < this.leftText.length; i+=2) {
+                let state1 = String(this.leftText[i]).split("$");
+                let state2 = String(this.rightText[i]).split("$");
+                sum1 += parseInt(state1[1]);
+                sum2 += parseInt(state2[1]);
+            }
+            if (curSalary == "") {
+                return "";
+            }
+            return String(parseInt((sum1 / sum2) * parseInt(curSalary)));
+        }
+        return curSalary;
+    }
 
     display(id, geo) {
         var index; var side;
