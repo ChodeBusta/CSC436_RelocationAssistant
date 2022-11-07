@@ -4,7 +4,9 @@ import MapChart from './MapChart';
 const Map = () =>  {
 
     return (
-        <MapChart />
+        <div className='MapChart'>
+            <MapChart />
+        </div>
     );
 
 }

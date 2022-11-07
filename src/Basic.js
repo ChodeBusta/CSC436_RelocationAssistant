@@ -98,7 +98,21 @@ class Basic extends Component {
     }
     // TODO: Add functionality to this.compareSalary() to actually do calculations
     compareSalary(){
-        const curSalary = this.state.value;
+        const state1 = (String(this.leftText)).split("$");
+        const state2 = (String(this.rightText)).split("$");
+        let curSalary = this.state.value;
+        if (state1.length > 1 && state2.length > 1) {
+            let sum1 = 0;
+            let sum2 = 0;
+            for (let i = 1; i < state1.length; i++) {
+                sum1 += parseInt(state1[i].split(",")[0]);
+                sum2 += parseInt(state2[i].split(",")[0]);
+            }
+            if (curSalary == "") {
+                return "";
+            }
+            return String(parseInt((sum1 / sum2) * parseInt(curSalary)));
+        }
         return curSalary;
     }
 

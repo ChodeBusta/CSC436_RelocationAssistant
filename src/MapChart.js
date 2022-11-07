@@ -9,7 +9,7 @@ import {
 } from "react-simple-maps";
 
 import allStates from "./data/allstates.json";
-import './style.css'
+import './basic.css'
 
 // Counties 
 // const geoUrl = "https://raw.githubusercontent.com/deldersveld/topojson/master/countries/united-states/higher-quality-5m/5m-US-counties.json";
