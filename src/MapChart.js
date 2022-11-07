@@ -162,8 +162,7 @@ class MapChart extends Component {
                 items: result.items
             });
             if(side === "left"){
-                this.leftText = [
-                    result.name,<br/>,
+                this.leftText = [result.name,<br/>,
                     "Annual Rent: $" + result.rent,<br/>,
                     "Electricity: $" + result.electricity,<br/>,
                     "Gas: $" + result.gas,<br/>,
@@ -173,8 +172,7 @@ class MapChart extends Component {
                     "Internet: $" + result.internet,
                 ];
             }else if(side === "right"){
-                this.rightText = [
-                    result.name,<br/>,
+                this.rightText = [result.name,<br/>,
                     "Annual Rent: $" + result.rent,<br/>,
                     "Electricity: $" + result.electricity,<br/>,
                     "Gas: $" + result.gas,<br/>,
