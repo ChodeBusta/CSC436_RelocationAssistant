@@ -1,28 +1,36 @@
-#leftResults { grid-area: LR; }
-#leftSalary  { grid-area: LS; }
-#rightResults{ grid-area: RR; }
-#rightSalary { grid-area: RS; }
+#leftButtons        { grid-area: LB; }
+#leftResults        { grid-area: LR; }
+#rightButtons       { grid-area: RB; }
+#rightResults       { grid-area: RR; }
+#salaryComparison   { grid-area: SC; }
 
-#gridContainer{
+#basicGridContainer{
     display: grid;
     grid-template-areas: 
-        'LS RS' 
-        'LR RR' 
-        'LR RR' 
-        'LR RR' 
-        'LR RR';
+        'LB SC SC SC SC RB' 
+        'LB LR LR RR RR RB' 
+        'LB LR LR RR RR RB' 
+        'LB LR LR RR RR RB' 
+        'LB LR LR RR RR RB' ;
     gap: 10px;
     padding: 10px;
 }
 
-#gridContainer > div{
+#mapGridContainer{
+    display: grid;
+    grid-template-areas: 
+        'SC SC SC SC' 
+        'LR LR RR RR' 
+        'LR LR RR RR' 
+        'LR LR RR RR'  
+        'LR LR RR RR' ;
+    gap: 10px;
+    padding: 10px;
+}
+
+#basicGridContainer > div, #mapGridContainer > div{
     background-color: paleturquoise;
     text-align: center;
     padding: 30px;
     font-size: 20px;
-}
-
-.MapChart {
-    padding-left: 20%;
-    padding-right: 20%;
 }

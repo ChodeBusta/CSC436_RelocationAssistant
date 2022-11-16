@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import "./basic.css";
+import "./style.css";
 
 class Basic extends Component {
     constructor(props) {
@@ -19,7 +19,6 @@ class Basic extends Component {
         // This is the salary variables, changing the name breaks it
         this.state = {value: ''};
         this.validateNumber = this.validateNumber.bind(this);
-        // TODO: Add fields to determine how much something costs
     }
 
     validateNumber(e){
@@ -106,10 +105,10 @@ class Basic extends Component {
                 sum1 += parseInt(state1[i].split(",")[0]);
                 sum2 += parseInt(state2[i].split(",")[0]);
             }
-            if (curSalary == "") {
+            if (curSalary === "") {
                 return "";
             }
-            return String(parseInt((sum1 / sum2) * parseInt(curSalary)));
+            return String(parseInt((sum2 / sum1) * parseInt(curSalary)));
         }
         return curSalary;
     }
@@ -119,15 +118,12 @@ class Basic extends Component {
         const rightButtons = this.loopButtons("right");
         const output = this.compareSalary() 
         return (
-            <div id="gridContainer">
+            <div id="basicGridContainer">
                 <div id="leftButtons">
                     {leftButtons}
                 </div>
                 <div id="leftResults">
                     <p>{this.leftText}</p>
-                </div>
-                <div id="leftSalary">
-                    <input value={this.state.value} onChange={this.validateNumber}/>
                 </div>
                 <div id="rightResults">
                     <p>{this.rightText}</p>
@@ -138,8 +134,12 @@ class Basic extends Component {
                 <div id="rightResults">
                     <p>{this.rightText}</p>
                 </div>
-                <div id="rightSalary">
-                    <input value={output} readOnly/>
+                <div id="salaryComparison">
+                    <p>
+                        <input value={this.state.value} onChange={this.validateNumber}/>
+                        &nbsp;is equivalent to a salary of&nbsp;
+                        <input value={output} readOnly/>
+                    </p>
                 </div>
             </div>
         );

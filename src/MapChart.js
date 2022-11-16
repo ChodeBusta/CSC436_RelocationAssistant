@@ -9,7 +9,7 @@ import {
 } from "react-simple-maps";
 
 import allStates from "./data/allstates.json";
-import './basic.css'
+import './style.css'
 
 // Counties 
 // const geoUrl = "https://raw.githubusercontent.com/deldersveld/topojson/master/countries/united-states/higher-quality-5m/5m-US-counties.json";
@@ -96,24 +96,25 @@ class MapChart extends Component {
                 )}
                 </Geographies>
             </ComposableMap>
-            <div id="gridContainer">
+            <div id="mapGridContainer">
                 <div id="leftResults">
                     <p>{this.leftText}</p>
-                </div>
-                <div id="leftSalary">
-                <input value={this.state.value} onChange={this.validateNumber}/>
                 </div>
                 <div id="rightResults">
                     <p>{this.rightText}</p>
                 </div>
-                <div id="rightSalary">
-                    <input value={this.compareSalary()} readOnly/>
+                <div id="salaryComparison">
+                    <p>
+                        <input value={this.state.value} onChange={this.validateNumber}/>
+                        &nbsp;is equivalent to a salary of&nbsp;
+                        <input value={this.compareSalary()} readOnly/>
+                    </p>
                 </div>
             </div>
             </>
         );
     };
-
+    
     validateNumber(e){
         const re = /^[0-9\b]+$/;
         if(e.target.value === '' || re.test(e.target.value)){
@@ -132,10 +133,10 @@ class MapChart extends Component {
                 sum1 += parseInt(state1[1]);
                 sum2 += parseInt(state2[1]);
             }
-            if (curSalary == "") {
+            if (curSalary === "") {
                 return "";
             }
-            return String(parseInt((sum1 / sum2) * parseInt(curSalary)));
+            return String(parseInt((sum2 / sum1) * parseInt(curSalary)));
         }
         return curSalary;
     }
