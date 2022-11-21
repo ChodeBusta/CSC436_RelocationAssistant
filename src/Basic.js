@@ -28,23 +28,34 @@ class Basic extends Component {
         }
     }
 
-    loopButtons(side) {
+    stateButtons(side) {
         const buttons = [];
         for (let i = 0; i < this.states.length; i++) {
-            buttons.push(this.createButtons(this.states[i], side));
+            buttons.push(this.createButton(this.states[i], () => this.handleClick(this.states[i], side)));
         }
         return buttons;
     }
 
-    createButtons(name, side) {
+    utilityButtons(){
+        const buttons = []
+        // Clear
+        buttons.push(this.createButton("Clear", () => this.handleClick("Alabama", "left")))
+        // Shows states less expensive than the one selected
+        buttons.push(this.createButton("Show Les Expensive", () => this.handleClick("Arizona", "left")))
+        // Shows states more expensive than the one selected
+        buttons.push(this.createButton("Show More Expensive", () => this.handleClick("Alaska", "left")))
+        return buttons;
+    }
+
+    createButton(buttonName, lambda) {
         return (
             React.createElement(
                 "button",
                 {
-                    key: name,
-                    onClick: () => this.handleClick(name, side)
+                    key: buttonName,
+                    onClick: lambda
                 },
-                name                
+                buttonName                
             )
         )
     }
@@ -107,11 +118,15 @@ class Basic extends Component {
     }
 
     render () {
-        const leftButtons = this.loopButtons("left");
-        const rightButtons = this.loopButtons("right");
+        const leftButtons = this.stateButtons("left");
+        const rightButtons = this.stateButtons("right");
+        const utilityButtons = this.utilityButtons();
         const output = this.compareSalary() 
         return (
             <div id="basicGridContainer">
+                <div id="utilityButtons">
+                    {utilityButtons}
+                </div>
                 <div id="leftButtons">
                     {leftButtons}
                 </div>

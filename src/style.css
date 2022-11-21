@@ -3,10 +3,12 @@
 #rightButtons       { grid-area: RB; }
 #rightResults       { grid-area: RR; }
 #salaryComparison   { grid-area: SC; }
+#utilityButtons     { grid-area: UB; }
 
 #basicGridContainer{
     display: grid;
     grid-template-areas: 
+        'UB UB UB UB UB UB'
         'LB SC SC SC SC RB' 
         'LB LR LR RR RR RB' 
         'LB LR LR RR RR RB' 
