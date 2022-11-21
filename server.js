@@ -30,7 +30,7 @@ mongoose.connect(mongoDBURL, { useNewUrlParser: true});
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 function startUp(){
-    State.find({name: "Alaska"}).exec( function (err, results) {
+    State.find({name: "Alabama"}).exec( function (err, results) {
         if(err){
             console.log("Server Error: Problem with Startup")
         }else if(results.length == 0){
@@ -69,13 +69,24 @@ function initializeDB(){
 startUp();
 
 app.get('/get/:stateName', (req, res) => {
-    State.findOne({name: req.params.stateName}).exec( (err, result) => {
-        if (err || !result){
-            return res.end("ERROR");
-        } else{
-            res.end(JSON.stringify(result));
-        }
-    })
+    if(req.params.stateName === "ALL"){ // Get every state
+        State.find({}).exec( (err, result) => {
+            if(err || !result){
+                return res.end("ERROR");
+            } else{
+                res.end(JSON.stringify(result));
+            }
+        })
+    }
+    else{ // Get a specific state
+        State.findOne({name: req.params.stateName}).exec( (err, result) => {
+            if (err || !result){
+                return res.end("ERROR");
+            } else{
+                res.end(JSON.stringify(result));
+            }
+        })
+    }
 });
 
 
