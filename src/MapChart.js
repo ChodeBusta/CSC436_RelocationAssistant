@@ -190,26 +190,19 @@ class MapChart extends Component {
                 isLoaded: true,
                 items: result.items
             });
+            var displayText = [result.name,<br/>,
+                "Annual Rent: $" + result.rent,<br/>,
+                "Electricity: $" + result.electricity,<br/>,
+                "Gas: $" + result.gas,<br/>,
+                "Water: $" + result.water,<br/>,
+                "Sewer: $" + result.sewer,<br/>,
+                "Cable: $" + result.cable,<br/>,
+                "Internet: $" + result.internet,
+            ];
             if(side === "left"){
-                this.leftText = [result.name,<br/>,
-                    "Annual Rent: $" + result.rent,<br/>,
-                    "Electricity: $" + result.electricity,<br/>,
-                    "Gas: $" + result.gas,<br/>,
-                    "Water: $" + result.water,<br/>,
-                    "Sewer: $" + result.sewer,<br/>,
-                    "Cable: $" + result.cable,<br/>,
-                    "Internet: $" + result.internet,
-                ];
+                this.leftText = displayText;
             }else if(side === "right"){
-                this.rightText = [result.name,<br/>,
-                    "Annual Rent: $" + result.rent,<br/>,
-                    "Electricity: $" + result.electricity,<br/>,
-                    "Gas: $" + result.gas,<br/>,
-                    "Water: $" + result.water,<br/>,
-                    "Sewer: $" + result.sewer,<br/>,
-                    "Cable: $" + result.cable,<br/>,
-                    "Internet: $" + result.internet,
-                ];
+                this.rightText = displayText;
             }
             },
             // Note: it's important to handle errors here
