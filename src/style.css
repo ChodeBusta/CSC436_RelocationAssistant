@@ -5,22 +5,10 @@
 #salaryComparison   { grid-area: SC; }
 #utilityButtons     { grid-area: UB; }
 
-#basicGridContainer{
-    display: grid;
-    grid-template-areas: 
-        'UB UB UB UB UB UB'
-        'LB SC SC SC SC RB' 
-        'LB LR LR RR RR RB' 
-        'LB LR LR RR RR RB' 
-        'LB LR LR RR RR RB' 
-        'LB LR LR RR RR RB' ;
-    gap: 10px;
-    padding: 10px;
-}
-
 #mapGridContainer{
     display: grid;
     grid-template-areas: 
+        'UB UB UB UB'
         'SC SC SC SC' 
         'LR LR RR RR' 
         'LR LR RR RR' 
@@ -30,7 +18,7 @@
     padding: 10px;
 }
 
-#basicGridContainer > div, #mapGridContainer > div{
+#mapGridContainer > div{
     background-color: paleturquoise;
     text-align: center;
     padding: 30px;
