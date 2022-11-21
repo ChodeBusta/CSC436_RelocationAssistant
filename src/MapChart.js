@@ -74,20 +74,20 @@ class MapChart extends Component {
                             centroid[0] < -67 &&
                             (Object.keys(offsets).indexOf(cur.id) === -1 ? (
                                 <Marker coordinates={centroid}>
-                                <text y="2" fontSize={14} textAnchor="middle">
-                                    {cur.id}
-                                </text>
-                        </Marker>
+                                    <text y="2" fontSize={14} textAnchor="middle">
+                                        {cur.id}
+                                    </text>
+                                </Marker>
                         ) : (
                             <Annotation
                                 subject={centroid}
                                 dx={offsets[cur.id][0]}
                                 dy={offsets[cur.id][1]}
                             >
-                            <text x={4} fontSize={14} alignmentBaseline="middle">
-                                {cur.id}
-                            </text>
-                        </Annotation>
+                                <text x={4} fontSize={14} alignmentBaseline="middle">
+                                    {cur.id}
+                                </text>
+                            </Annotation>
                         ))}
                         </g>
                     );
