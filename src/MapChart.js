@@ -37,7 +37,7 @@ class MapChart extends Component {
         this.geo = [];
         this.leftText = [];
         this.rightText = [];
-        this.state = {value: ''};
+        this.state = {salary: ''};
         this.validateNumber = this.validateNumber.bind(this);
         this.id.push(null); this.id.push(null); this.geo.push(null); this.geo.push(null);
     }
@@ -105,7 +105,7 @@ class MapChart extends Component {
                 </div>
                 <div id="salaryComparison">
                     <p>
-                        <input value={this.state.value} onChange={this.validateNumber}/>
+                        <input value={this.state.salary} onChange={this.validateNumber}/>
                         &nbsp;is equivalent to a salary of&nbsp;
                         <input value={this.compareSalary()} readOnly/>
                     </p>
@@ -118,12 +118,12 @@ class MapChart extends Component {
     validateNumber(e){
         const re = /^[0-9\b]+$/;
         if(e.target.value === '' || re.test(e.target.value)){
-            this.setState({value: e.target.value})
+            this.setState({salary: e.target.value})
         }
     }
 
     compareSalary(){
-        let curSalary = this.state.value;
+        let curSalary = this.state.salary;
         if (this.leftText.length > 1 && this.rightText.length > 1) {
             let sum1 = 0;
             let sum2 = 0;

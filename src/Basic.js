@@ -17,21 +17,23 @@ class Basic extends Component {
         this.leftText = "";
         this.rightText = "";
         // This is the salary variables, changing the name breaks it
-        this.state = {value: ''};
+        this.state = {salary: ''};
         this.validateNumber = this.validateNumber.bind(this);
     }
 
     validateNumber(e){
         const re = /^[0-9\b]+$/;
         if(e.target.value === '' || re.test(e.target.value)){
-            this.setState({value: e.target.value})
+            this.setState({salary: e.target.value})
         }
     }
 
     stateButtons(side) {
         const buttons = [];
         for (let i = 0; i < this.states.length; i++) {
-            buttons.push(this.createButton(this.states[i], () => this.handleClick(this.states[i], side)));
+            buttons.push(
+                this.createButton(this.states[i], () => this.getStateInfo(this.states[i], side))
+            );
         }
         return buttons;
     }
@@ -39,11 +41,11 @@ class Basic extends Component {
     utilityButtons(){
         const buttons = []
         // Clear
-        buttons.push(this.createButton("Clear", () => this.handleClick("Alabama", "left")))
+        buttons.push(this.createButton("Clear", () => this.clearInfo()))
         // Shows states less expensive than the one selected
-        buttons.push(this.createButton("Show Les Expensive", () => this.handleClick("Arizona", "left")))
+        buttons.push(this.createButton("Show Less Expensive", () => this.showLessExpensive()))
         // Shows states more expensive than the one selected
-        buttons.push(this.createButton("Show More Expensive", () => this.handleClick("Alaska", "left")))
+        buttons.push(this.createButton("Show More Expensive", () => this.showMoreExpensive()))
         return buttons;
     }
 
@@ -60,7 +62,7 @@ class Basic extends Component {
         )
     }
 
-    handleClick(name, side) {
+    getStateInfo(name, side) {
         fetch("http://localhost:80/get/" + name, {method: 'get'})
             .then(res => res.json())
             .then(
@@ -101,7 +103,7 @@ class Basic extends Component {
     compareSalary(){
         const state1 = (String(this.leftText)).split("$");
         const state2 = (String(this.rightText)).split("$");
-        let curSalary = this.state.value;
+        let curSalary = this.state.salary;
         if (state1.length > 1 && state2.length > 1) {
             let sum1 = 0;
             let sum2 = 0;
@@ -115,6 +117,23 @@ class Basic extends Component {
             return String(parseInt((sum2 / sum1) * parseInt(curSalary)));
         }
         return curSalary;
+    }
+
+    clearInfo(){
+        this.leftText = "";
+        this.rightText = "";
+        this.setState({salary: ''});
+        this.forceUpdate();
+    }
+
+    showLessExpensive(){
+        console.log("Less Expensive Button clicked")
+        // TODO
+    }
+
+    showMoreExpensive(){
+        console.log("More Expensive Button clicked")
+        // TODO
     }
 
     render () {
@@ -144,7 +163,7 @@ class Basic extends Component {
                 </div>
                 <div id="salaryComparison">
                     <p>
-                        <input value={this.state.value} onChange={this.validateNumber}/>
+                        <input value={this.state.salary} onChange={this.validateNumber}/>
                         &nbsp;is equivalent to a salary of&nbsp;
                         <input value={output} readOnly/>
                     </p>
