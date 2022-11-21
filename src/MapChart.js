@@ -45,18 +45,87 @@ class MapChart extends Component {
     clearInfo(){
         this.leftText = "";
         this.rightText = "";
+        this.x = 0;
         this.setState({salary: ''});
+        this.id.forEach(id => {
+            var index = this.id.indexOf(id)
+            this.geo[index].fill = "#DDDDDD"
+            this.id[index] = null;
+            this.geo[index] = null;
+        })
         this.forceUpdate();
     }
 
     showLessExpensive(){
-        console.log("Less Expensive Button clicked")
-        // TODO
+        if (this.leftText.length > 1){
+            let sum1 = 0;
+            for (let i = 2; i < this.leftText.length; i+=2) {
+                let state1 = String(this.leftText[i]).split("$");
+                sum1 += parseInt(state1[1]);
+            }
+            fetch("http://localhost:80/get/ALL", {method: 'get'})
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    let sum2 = 0;
+                    let list = []
+                    result.forEach(e => {
+                        sum2 = e.rent + e.electricity + e.gas + e.water + e.sewer + e.cable + e.internet;
+                        if(sum1 > sum2){
+                            list.push(e.name);
+                            list.push(<br/>);
+                        }
+                    })
+                    this.rightText = list;
+                    this.forceUpdate();
+                },
+                // Note: it's important to handle errors here
+                // instead of a catch() block so that we don't swallow
+                // exceptions from actual bugs in components.
+                (error) => {
+                    this.setState({
+                        isLoaded: true,
+                        error
+                    });
+                }
+            )
+        }
     }
 
     showMoreExpensive(){
-        console.log("More Expensive Button clicked")
-        // TODO
+        if (this.leftText.length > 1){
+            let sum1 = 0;
+            for (let i = 2; i < this.leftText.length; i+=2) {
+                let state1 = String(this.leftText[i]).split("$");
+                sum1 += parseInt(state1[1]);
+            }
+            fetch("http://localhost:80/get/ALL", {method: 'get'})
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    let sum2 = 0;
+                    let list = []
+                    result.forEach(e => {
+                        sum2 = e.rent + e.electricity + e.gas + e.water + e.sewer + e.cable + e.internet;
+                        if(sum1 < sum2){
+                            list.push(e.name);
+                            list.push(<br/>);
+                        }
+                    })
+                    this.rightText = list;
+                    this.forceUpdate();
+                },
+                // Note: it's important to handle errors here
+                // instead of a catch() block so that we don't swallow
+                // exceptions from actual bugs in components.
+                (error) => {
+                    this.setState({
+                        isLoaded: true,
+                        error
+                    });
+                }
+            )
+        }
     }
     
     utilityButtons(){
