@@ -14,11 +14,11 @@
         display: grid;
         grid-template-areas: 
             'UB UB UB UB UB UB'
-            'SC SC SC SC SC SC' 
             'LR MAP MAP MAP MAP RR'
             'LR MAP MAP MAP MAP RR'
             'LR MAP MAP MAP MAP RR'
-            'LR MAP MAP MAP MAP RR';
+            'LR MAP MAP MAP MAP RR'
+            'SC SC SC SC SC SC';
         font-family: JosefinSansBold;
     }
 }
@@ -28,8 +28,8 @@
         display: grid;
         grid-template-areas: 
             'UB UB UB UB'
-            'SC SC SC SC'
             'MAP MAP MAP MAP'
+            'SC SC SC SC'
             'LR LR RR RR'
             'LR LR RR RR' ;
         font-family: JosefinSansBold;
@@ -39,11 +39,12 @@
 #mapGridContainer > div{
     text-align: center;
     padding-bottom: 30px;
-    font-size: 2.5vw;
+    font-size: 1.5vw;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 .MapChart {
-    padding: 5%;
     margin: auto;
 }
 
@@ -70,7 +71,7 @@
     color: #fdf0d5;
     border-radius: 10px;
     border-style: solid;
-    font-size: 2vw;
+    font-size: 1.5vw;
     width: 18%;
 }
 

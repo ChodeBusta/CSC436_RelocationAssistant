@@ -30,6 +30,15 @@ const offsets = {
     DC: [49, 21]
 };
 
+const translate = {"Alabama": "AL",
+    "Alaska": "AK","Arizona": "AZ","Arkansas": "AR","California": "CA","Colorado": "CO","Connecticut": "CT","Delaware": "DE",
+    "Florida": "FL","Georgia": "GA","Hawaii": "HI","Idaho": "ID","Illinois": "IL","Indiana": "IN","Iowa": "IA",
+    "Kansas": "KS","Kentucky": "KY","Louisiana": "LA","Maine": "ME","Maryland": "MD","Massachusetts": "MA","Michigan": "MI",
+    "Minnesota": "MN","Mississippi": "MS","Missouri": "MO","Montana": "MT","Nebraska": "NE","Nevada": "NV","New Hampshire": "NH",
+    "New Jersey": "NJ","New Mexico": "NM","New York": "NY","North Carolina": "NC","North Dakota": "ND","Ohio": "OH","Oklahoma": "OK",
+    "Oregon": "OR","Pennsylvania": "PA","Rhode Island": "RI","South Carolina": "SC","South Dakota": "SD","Tennessee": "TN","Texas": "TX",
+    "Utah": "UT","Vermont": "VT","Virginia": "VA","Washington": "WA","West Virginia": "WV","Wisconsin": "WI","Wyoming": "WY"}
+
 class MapChart extends Component {
     constructor(props) {
         super(props);
@@ -69,15 +78,13 @@ class MapChart extends Component {
             .then(
                 (result) => {
                     let sum2 = 0;
-                    let list = []
                     result.forEach(e => {
                         sum2 = e.rent + e.electricity + e.gas + e.water + e.sewer + e.cable + e.internet;
                         if(sum1 > sum2){
-                            list.push(e.name);
-                            list.push(<br/>);
+                            var thisState = document.getElementById(translate[e.name]);
+                            thisState.style.fill = COLORS.secondary;
                         }
                     })
-                    this.rightText = list;
                     this.forceUpdate();
                 },
                 // Note: it's important to handle errors here
@@ -105,15 +112,13 @@ class MapChart extends Component {
             .then(
                 (result) => {
                     let sum2 = 0;
-                    let list = []
                     result.forEach(e => {
                         sum2 = e.rent + e.electricity + e.gas + e.water + e.sewer + e.cable + e.internet;
                         if(sum1 < sum2){
-                            list.push(e.name);
-                            list.push(<br/>);
+                            var thisState = document.getElementById(translate[e.name]);
+                            thisState.style.fill = COLORS.secondaryHighlight;
                         }
                     })
-                    this.rightText = list;
                     this.forceUpdate();
                 },
                 // Note: it's important to handle errors here
@@ -274,6 +279,9 @@ class MapChart extends Component {
         const utilityButtons = this.utilityButtons();
         return (
             <>
+            <div id='sidePanel'>
+                <p id='sidePanelLabel'>Side Panel</p>
+            </div>
             <div>{utilityButtons}</div>
             <div id="mapGridContainer">
                 <div id="map">

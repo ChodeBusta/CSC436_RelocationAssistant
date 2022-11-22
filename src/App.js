@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Map from './Map';
-import SidePanel from './SidePanel';
 
 class App extends Component {
     constructor(props) {
@@ -13,7 +12,6 @@ class App extends Component {
             <div onMouseMove={this.openSidePanel}>
                 <h1 id='title'>Relocation Assistant</h1>
                 {this.state.version}
-                <SidePanel/>
             </div>
         );
     }
