@@ -275,7 +275,9 @@ class MapChart extends Component {
         return (
             <>
             <div>{utilityButtons}</div>
-            <ComposableMap projection="geoAlbersUsa">
+            <div id="mapGridContainer">
+                <div id="map">
+                <ComposableMap projection="geoAlbersUsa">
                 <Geographies geography={geoUrl}>
                     {({ geographies }) => (
                     <>
@@ -328,10 +330,7 @@ class MapChart extends Component {
                 </>
                 )}
                 </Geographies>
-            </ComposableMap>
-            <div id="mapGridContainer">
-                <div id="leftResults">
-                    <p>{this.leftText}</p>
+                </ComposableMap>
                 </div>
                 <div id="rightResults">
                     <p>{this.rightText}</p>
@@ -341,6 +340,9 @@ class MapChart extends Component {
                         <input value={this.state.salary} onChange={this.validateNumber} placeholder="Salary Amount" id="salaryInput"/>
                         &nbsp;in {this.selectedState()} is equivalent to a salary of {this.compareSalary()} in {this.compareState()}&nbsp;
                     </p>
+                </div>
+                <div id="leftResults">
+                    <p>{this.leftText}</p>
                 </div>
             </div>
             </>

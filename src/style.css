@@ -4,17 +4,36 @@
 #rightResults       { grid-area: RR; }
 #salaryComparison   { grid-area: SC; }
 #utilityButtons     { grid-area: UB; }
+#map                { grid-area: MAP; }
 
-#mapGridContainer{
-    display: grid;
-    grid-template-areas: 
-        'UB UB UB UB'
-        'SC SC SC SC' 
-        'LR LR RR RR' 
-        'LR LR RR RR' 
-        'LR LR RR RR'  
-        'LR LR RR RR' ;
-    font-family: JosefinSansBold;
+@media (min-aspect-ratio: 1/1){
+    body{
+        background-color: black;
+    }
+    #mapGridContainer{
+        display: grid;
+        grid-template-areas: 
+            'UB UB UB UB UB UB'
+            'SC SC SC SC SC SC' 
+            'LR MAP MAP MAP MAP RR'
+            'LR MAP MAP MAP MAP RR'
+            'LR MAP MAP MAP MAP RR'
+            'LR MAP MAP MAP MAP RR';
+        font-family: JosefinSansBold;
+    }
+}
+
+@media (max-aspect-ratio: 1/1){
+    #mapGridContainer{
+        display: grid;
+        grid-template-areas: 
+            'UB UB UB UB'
+            'SC SC SC SC'
+            'MAP MAP MAP MAP'
+            'LR LR RR RR'
+            'LR LR RR RR' ;
+        font-family: JosefinSansBold;
+    }
 }
 
 #mapGridContainer > div{
@@ -90,7 +109,7 @@
 }
 
 .rsm-svg {
-    width: 70%;
+    width: 100%;
 }
 
 #sidePanel {
