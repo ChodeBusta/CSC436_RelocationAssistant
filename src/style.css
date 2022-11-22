@@ -66,3 +66,8 @@
     font-size: 70px;
     padding-top: 20px;
 }
+
+::placeholder {
+    color: #FFFFFF;
+    opacity: 80%;
+}
