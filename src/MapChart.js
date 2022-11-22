@@ -18,6 +18,13 @@ import './style.css'
 // US States
 const geoUrl = "https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json";
 
+const moveStates = [
+    "Florida",
+    "Michigan",
+    "Louisiana",
+    "Hawaii"
+]
+
 const offsets = {
     VT: [58, -12],
     NH: [34, 2],
@@ -343,6 +350,23 @@ class MapChart extends Component {
                 {geographies.map(geo => {
                     const centroid = geoCentroid(geo);
                     const cur = allStates.find(s => s.val === geo.id);
+                    if (moveStates.includes(geo.properties.name)) {
+                        if (geo.properties.name === "Florida") {
+                            centroid[0] = -82;
+                        }
+                        else if (geo.properties.name === "Michigan") {
+                            centroid[0] = -85;
+                            centroid[1] = 43.4;
+                        }
+                        else if (geo.properties.name === "Louisiana") {
+                            centroid[0] = -92.5;
+                        }
+                        else if (geo.properties.name === "Hawaii") {
+                            centroid[0] = -158;
+                            centroid[1] = 19.5;
+                            console.log(centroid);
+                        }
+                    }
                     return (
                         <g id={cur.id} key={geo.rsmKey + "-name"}>
                             {cur &&
