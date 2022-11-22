@@ -81,5 +81,11 @@
     font-family: JosefinSansBold;
     color: #fdf0d5;
     border-style: solid;
+    border-color: #fdf0d5;
     border-radius: 10px;
+}
+
+.panelButton:active {
+    color: #72603d;
+    border-color: #72603d;
 }
