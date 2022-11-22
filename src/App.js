@@ -17,13 +17,14 @@ class App extends Component {
     }
 
     openSidePanel = event => {
+        var sidePanel;
         if (event.clientX > window.innerWidth / 1.05) {
-            var sidePanel = document.getElementById('sidePanel');
+            sidePanel = document.getElementById('sidePanel');
             sidePanel.style.display = "block";
             sidePanel.className = "openSidePanel"
         }
         else if (event.clientX < window.innerWidth / 1.30) {
-            var sidePanel = document.getElementById('sidePanel');
+            sidePanel = document.getElementById('sidePanel');
             sidePanel.className = "closeSidePanel"
         }
     }

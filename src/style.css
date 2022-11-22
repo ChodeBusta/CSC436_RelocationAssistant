@@ -1,9 +1,6 @@
-#leftButtons        { grid-area: LB; }
 #leftResults        { grid-area: LR; }
-#rightButtons       { grid-area: RB; }
 #rightResults       { grid-area: RR; }
 #salaryComparison   { grid-area: SC; }
-#utilityButtons     { grid-area: UB; }
 #map                { grid-area: MAP; }
 
 @media (min-aspect-ratio: 1/1){
@@ -13,7 +10,6 @@
     #mapGridContainer{
         display: grid;
         grid-template-areas: 
-            'UB UB UB UB UB UB'
             'LR MAP MAP MAP MAP RR'
             'LR MAP MAP MAP MAP RR'
             'LR MAP MAP MAP MAP RR'
@@ -27,7 +23,6 @@
     #mapGridContainer{
         display: grid;
         grid-template-areas: 
-            'UB UB UB UB'
             'MAP MAP MAP MAP'
             'SC SC SC SC'
             'LR LR RR RR'
@@ -93,7 +88,7 @@
 }
 
 .panelButton {
-    background-color: #003049;
+    background-color: #990000;
     margin-right: 8px;
     padding: 3px;
     font-size: 2vw;
@@ -117,6 +112,7 @@
     background-color: #780000;
     height: 100%;
     width: 20%;
+    padding:10px;
     position: fixed;
     top: 0;
     right: 0;

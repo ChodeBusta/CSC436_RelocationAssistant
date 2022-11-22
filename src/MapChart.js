@@ -59,15 +59,16 @@ class MapChart extends Component {
         this.setState({salary: ''});
         this.id.forEach(id => {
             var index = this.id.indexOf(id)
-            this.geo[index].fill = COLORS.primary
             this.id[index] = null;
             this.geo[index] = null;
         })
+        this.resetMapColors();
         this.forceUpdate();
     }
 
     showLessExpensive(){
-        if (this.leftText.length > 1){
+        if (this.leftText.length > 1 && this.rightText.length < 1){
+            this.resetMapColors();
             let sum1 = 0;
             for (let i = 2; i < this.leftText.length; i+=2) {
                 let state1 = String(this.leftText[i]).split("$");
@@ -101,7 +102,8 @@ class MapChart extends Component {
     }
 
     showMoreExpensive(){
-        if (this.leftText.length > 1){
+        if (this.leftText.length > 1 && this.rightText.length < 1){
+            this.resetMapColors();
             let sum1 = 0;
             for (let i = 2; i < this.leftText.length; i+=2) {
                 let state1 = String(this.leftText[i]).split("$");
@@ -186,14 +188,14 @@ class MapChart extends Component {
     }
 
     selectedState() {
-        if (this.leftText == "") {
+        if (this.leftText === "") {
             return "_";
         }
         return this.leftText[0];
     }
 
     compareState() {
-        if (this.rightText == "") {
+        if (this.rightText === "") {
             return "_";
         }
         return this.rightText[0];
@@ -202,6 +204,7 @@ class MapChart extends Component {
     display(id, geo) {
         var index; var side;
         if (this.x !== 0) {
+            this.resetMapColors();
             if (this.id.includes(id)) {
                 index = this.id.indexOf(id)
                 this.geo[index].fill = COLORS.primary
@@ -275,14 +278,47 @@ class MapChart extends Component {
         )
     }
 
+    resetMapColors() {
+        fetch("http://localhost:80/get/ALL", {method: 'get'})
+        .then(res => res.json())
+        .then(
+            (result) => {
+                var curLeft = "";
+                var curRight = "";
+                if (this.leftText.length > 1){
+                    curLeft = this.leftText[0];
+                }
+                if (this.rightText.length > 1){
+                    curRight = this.RightText[0];
+                }
+                result.forEach(e => {
+                    if(e.name !== curLeft && e.name !== curRight){
+                        var thisState = document.getElementById(translate[e.name]);
+                        thisState.style.fill = COLORS.primary;
+                    }
+                })
+                this.forceUpdate();
+            },
+            // Note: it's important to handle errors here
+            // instead of a catch() block so that we don't swallow
+            // exceptions from actual bugs in components.
+            (error) => {
+                this.setState({
+                    isLoaded: true,
+                    error
+                });
+            }
+        )
+    }
+
     render() {
         const utilityButtons = this.utilityButtons();
         return (
             <>
             <div id='sidePanel'>
                 <p id='sidePanelLabel'>Side Panel</p>
+                {utilityButtons}
             </div>
-            <div>{utilityButtons}</div>
             <div id="mapGridContainer">
                 <div id="map">
                 <ComposableMap projection="geoAlbersUsa">
