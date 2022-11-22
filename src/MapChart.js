@@ -9,6 +9,7 @@ import {
 } from "react-simple-maps";
 
 import allStates from "./data/allstates.json";
+import {COLORS} from './data/constants.js'
 import './style.css'
 
 // Counties 
@@ -18,7 +19,7 @@ import './style.css'
 const geoUrl = "https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json";
 
 const offsets = {
-    VT: [50, -8],
+    VT: [58, -12],
     NH: [34, 2],
     MA: [30, -1],
     RI: [28, 2],
@@ -49,7 +50,7 @@ class MapChart extends Component {
         this.setState({salary: ''});
         this.id.forEach(id => {
             var index = this.id.indexOf(id)
-            this.geo[index].fill = "#DDDDDD"
+            this.geo[index].fill = COLORS.primary
             this.id[index] = null;
             this.geo[index] = null;
         })
@@ -173,9 +174,9 @@ class MapChart extends Component {
             if (curSalary === "") {
                 return "";
             }
-            return String(parseInt((sum2 / sum1) * parseInt(curSalary)));
+            return '$' + String(parseInt((sum2 / sum1) * parseInt(curSalary)));
         }
-        return curSalary;
+        return "";
     }
 
     display(id, geo) {
@@ -183,7 +184,7 @@ class MapChart extends Component {
         if (this.x !== 0) {
             if (this.id.includes(id)) {
                 index = this.id.indexOf(id)
-                this.geo[index].fill = "#DDDDDD"
+                this.geo[index].fill = COLORS.primary
                 this.id[index] = null;
                 this.geo[index] = null;
                 this.x--;
@@ -193,8 +194,8 @@ class MapChart extends Component {
                 return;
             }
             else if (this.x !== 1) {
-                this.geo[1].fill = "#DDDDDD"
-                geo.fill = "#797979"
+                this.geo[1].fill = COLORS.primary
+                geo.fill = COLORS.primaryAccent
                 this.id[1] = id;
                 this.geo[1] = geo;
                 side = "right";
@@ -203,7 +204,7 @@ class MapChart extends Component {
                 index = this.id.indexOf(null)
                 this.id[index] = id;
                 this.geo[index] = geo;
-                geo.fill = "#797979"
+                geo.fill = COLORS.primaryAccent
                 this.x++;
                 if (index === 0) {side = "left";}
                 else {side = "right";}
@@ -213,7 +214,7 @@ class MapChart extends Component {
             this.id[0] = id;
             this.geo[0] = geo;
             this.x++;
-            geo.fill = "#797979"
+            geo.fill = COLORS.primaryAccent
         }
         this.get(side, geo.properties.name);
     }
@@ -267,13 +268,13 @@ class MapChart extends Component {
                         <Geography
                         id={allStates.find(s => s.val === geo.id).id}
                         key={geo.rsmKey}
-                        stroke="#FFFFFF"
+                        stroke={COLORS.primaryHighlight}
                         geography={geo}
-                        fill="#DDDDDD"
+                        fill={COLORS.primary}
                         style={{
                             default: {fill: geo.fill},
-                            hover: {fill: "#ADD8E6"},
-                            pressed: {fill: "#F9F900"},
+                            hover: {fill: COLORS.primaryHighlight},
+                            pressed: {fill: COLORS.primaryAccent},
                         }}
                         onClick={() => this.display(allStates.find(s => s.val === geo.id).id, geo)}
                     />
@@ -288,7 +289,7 @@ class MapChart extends Component {
                             centroid[0] < -67 &&
                             (Object.keys(offsets).indexOf(cur.id) === -1 ? (
                                 <Marker coordinates={centroid}>
-                                    <text y="2" fontSize={14} textAnchor="middle">
+                                    <text y="2" fontSize={14} textAnchor="middle" fill={COLORS.text} fontFamily="JosefinSansBold">
                                         {cur.id}
                                     </text>
                                 </Marker>
@@ -297,8 +298,11 @@ class MapChart extends Component {
                                 subject={centroid}
                                 dx={offsets[cur.id][0]}
                                 dy={offsets[cur.id][1]}
+                                connectorProps={{
+                                    stroke: COLORS.text,
+                                }}
                             >
-                                <text x={4} fontSize={14} alignmentBaseline="middle">
+                                <text x={4} fontSize={14} alignmentBaseline="middle" fill={COLORS.text} fontFamily="JosefinSansBold">
                                     {cur.id}
                                 </text>
                             </Annotation>
@@ -319,9 +323,8 @@ class MapChart extends Component {
                 </div>
                 <div id="salaryComparison">
                     <p>
-                        <input value={this.state.salary} onChange={this.validateNumber}/>
-                        &nbsp;is equivalent to a salary of&nbsp;
-                        <input value={this.compareSalary()} readOnly/>
+                        <input value={this.state.salary} onChange={this.validateNumber} placeholder="Salary Amount" id="salaryInput"/>
+                        &nbsp; is equivalent to a salary of {this.compareSalary()}&nbsp;
                     </p>
                 </div>
             </div>

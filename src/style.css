@@ -16,11 +16,53 @@
         'LR LR RR RR' ;
     gap: 10px;
     padding: 10px;
+    font-family: JosefinSansBold;
 }
 
 #mapGridContainer > div{
-    background-color: paleturquoise;
     text-align: center;
     padding: 30px;
     font-size: 20px;
+}
+
+.MapChart {
+    padding: 5%;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+@font-face {
+    font-family: 'JosefinSans';
+    src: local('JosefinSans-Regular'), url(fonts/JosefinSans-Regular.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: 'JosefinSansBold';
+    src: local('JosefinSans-Bold'), url(fonts/JosefinSans-Bold.ttf) format('truetype');
+}
+
+#salaryInput {
+    text-align: center;
+    font-family: JosefinSansBold;
+    background-color: #003049;
+    color: #fdf0d5;
+    border-radius: 10px;
+    border-style: solid;
+    font-size: 18px;
+    width: 130px;
+}
+
+#root {
+    background-color: #003049;
+    text-align: center;
+    color: #fdf0d5;
+    font-family: JosefinSans;
+}
+
+#title {
+    font-size: 70px;
+    padding-top: 20px;
 }
