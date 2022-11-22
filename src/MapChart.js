@@ -173,11 +173,26 @@ class MapChart extends Component {
                 sum2 += parseInt(state2[1]);
             }
             if (curSalary === "") {
-                return "";
+                return "_";
             }
             return '$' + String(parseInt((sum2 / sum1) * parseInt(curSalary)));
         }
-        return "";
+        return "_";
+    }
+
+    selectedState() {
+        if (this.leftText == "") {
+            return "_";
+        }
+        console.log(this.leftText)
+        return this.leftText[0];
+    }
+
+    compareState() {
+        if (this.rightText == "") {
+            return "_";
+        }
+        return this.rightText[0];
     }
 
     display(id, geo) {
@@ -323,9 +338,9 @@ class MapChart extends Component {
                     <p>{this.rightText}</p>
                 </div>
                 <div id="salaryComparison">
-                    <p>
+                    <p> A salary of &nbsp;   
                         <input value={this.state.salary} onChange={this.validateNumber} placeholder="Salary Amount" id="salaryInput"/>
-                        &nbsp; is equivalent to a salary of {this.compareSalary()}&nbsp;
+                        &nbsp;in {this.selectedState()} is equivalent to a salary of {this.compareSalary()} in {this.compareState()}&nbsp;
                     </p>
                 </div>
             </div>
