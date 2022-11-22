@@ -184,7 +184,6 @@ class MapChart extends Component {
         if (this.leftText == "") {
             return "_";
         }
-        console.log(this.leftText)
         return this.leftText[0];
     }
 

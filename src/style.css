@@ -92,3 +92,45 @@
 .rsm-svg {
     width: 70%;
 }
+
+#sidePanel {
+    background-color: #780000;
+    height: 100%;
+    width: 20%;
+    position: fixed;
+    top: 0;
+    right: 0;
+    display: none;
+}
+
+#sidePanelLabel {
+    background-color: #780000;
+    padding: 30px;
+    font-size: 2.5vw;
+}
+
+.openSidePanel {
+    animation: moveLeft 0.5s ease-in-out forwards;
+}
+
+@keyframes moveLeft {
+    from {
+      transform: translateX(100%);
+    }
+    to {
+      transform: translateX(0rem);
+    }
+}
+
+.closeSidePanel {
+    animation: moveRight 0.5s ease-in-out forwards;
+}
+
+@keyframes moveRight {
+    from {
+      transform: translateX(0rem);
+    }
+    to {
+      transform: translateX(100%);
+    }
+}
