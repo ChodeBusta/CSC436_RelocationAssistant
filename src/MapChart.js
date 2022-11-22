@@ -338,7 +338,7 @@ class MapChart extends Component {
                     <p>{this.rightText}</p>
                 </div>
                 <div id="salaryComparison">
-                    <p> A salary of &nbsp;   
+                    <p> A salary of&nbsp;   
                         <input value={this.state.salary} onChange={this.validateNumber} placeholder="Salary Amount" id="salaryInput"/>
                         &nbsp;in {this.selectedState()} is equivalent to a salary of {this.compareSalary()} in {this.compareState()}&nbsp;
                     </p>

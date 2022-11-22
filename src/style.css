@@ -20,12 +20,11 @@
 #mapGridContainer > div{
     text-align: center;
     padding-bottom: 30px;
-    font-size: 20px;
+    font-size: 2.5vw;
 }
 
 .MapChart {
     padding: 5%;
-    width: 80%;
     margin: auto;
 }
 
@@ -52,8 +51,8 @@
     color: #fdf0d5;
     border-radius: 10px;
     border-style: solid;
-    font-size: 18px;
-    width: 130px;
+    font-size: 2vw;
+    width: 18%;
 }
 
 #root {
@@ -64,7 +63,7 @@
 }
 
 #title {
-    font-size: 70px;
+    font-size: 7vw;
     padding-top: 20px;
 }
 
@@ -77,7 +76,7 @@
     background-color: #003049;
     margin-right: 8px;
     padding: 3px;
-    font-size: 18px;
+    font-size: 2vw;
     font-family: JosefinSansBold;
     color: #fdf0d5;
     border-style: solid;
@@ -88,4 +87,8 @@
 .panelButton:active {
     color: #72603d;
     border-color: #72603d;
+}
+
+.rsm-svg {
+    width: 70%;
 }
