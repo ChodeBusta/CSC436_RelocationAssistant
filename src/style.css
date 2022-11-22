@@ -25,11 +25,13 @@
 
 .MapChart {
     padding: 5%;
+    width: 100%;
 }
 
 * {
     margin: 0;
     padding: 0;
+    background-color: #003049;
 }
 
 @font-face {
@@ -68,4 +70,15 @@
 ::placeholder {
     color: #FFFFFF;
     opacity: 80%;
+}
+
+.panelButton {
+    background-color: #003049;
+    margin-right: 8px;
+    padding: 3px;
+    font-size: 18px;
+    font-family: JosefinSansBold;
+    color: #fdf0d5;
+    border-style: solid;
+    border-radius: 10px;
 }

@@ -146,7 +146,8 @@ class MapChart extends Component {
                 "button",
                 {
                     key: buttonName,
-                    onClick: lambda
+                    onClick: lambda,
+                    className: 'panelButton'
                 },
                 buttonName                
             )
