@@ -58,7 +58,8 @@ class MapChart extends Component {
         this.x = 0;
         this.setState({salary: ''});
         this.id.forEach(id => {
-            var index = this.id.indexOf(id)
+            var index = this.id.indexOf(id);
+            this.geo[index].fill = COLORS.primary;
             this.id[index] = null;
             this.geo[index] = null;
         })
