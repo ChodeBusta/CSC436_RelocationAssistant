@@ -68,12 +68,12 @@ class MapChart extends Component {
         this.x = 0;
         this.setState({salary: ''});
         this.resetMapColors();
-        // this.id.forEach(id => {
-        //     var index = this.id.indexOf(id);
-        //     this.geo[index].fill = COLORS.primary;
-        //     this.id[index] = null;
-        //     this.geo[index] = null;
-        // })
+        this.id.forEach(id => {
+            var index = this.id.indexOf(id);
+            this.geo[index].fill = COLORS.primary;
+            this.id[index] = null;
+            this.geo[index] = null;
+        })
         this.forceUpdate();
     }
 
@@ -217,12 +217,12 @@ class MapChart extends Component {
         if (this.x !== 0) {
             if (this.id.includes(id)) {
                 index = this.id.indexOf(id)
-                thisState.style.fill = COLORS.primary;
-                this.id[index] = null;
-                this.geo[index] = null;
                 this.x--;
-                if (index === 0) {this.leftText = "";}
-                else {this.rightText = "";}
+                if (index === 0) {
+                    this.leftText = this.rightText; this.rightText = ""; this.geo[0].fill = COLORS.primary; this.geo[0] = this.geo[1]; this.id[0] = this.id[1];
+                    this.geo[1] = null; this.id[1] = null;
+                }
+                else {this.rightText = ""; this.geo[1].fill = COLORS.primary; this.geo[1] = null; this.id[1] = null;}
                 this.forceUpdate();
                 return;
             }
@@ -286,14 +286,11 @@ class MapChart extends Component {
         let leftState = translate[this.leftText[0]]
         let rightState = translate[this.rightText[0]]
         if (leftState != undefined && leftState == state) {
-            console.log("Bruh1", leftState, rightState, state);
             return;
         }
         if (rightState != undefined && rightState == state) {
-            console.log("Bruh2", leftState, rightState, state);
             return;
         }
-        console.log("Bruh3", leftState, rightState, state);
         var thisState = document.getElementById(state);
         this.prevColor = thisState.style.fill;
         thisState.style.fill = COLORS.primaryHighlight;
@@ -303,14 +300,11 @@ class MapChart extends Component {
         let leftState = translate[this.leftText[0]]
         let rightState = translate[this.rightText[0]]
         if (leftState != undefined && leftState == state) {
-            console.log("Bruh4", leftState, rightState, state);
             return;
         }
         if (rightState != undefined && rightState == state) {
-            console.log("Bruh5", leftState, rightState, state);
             return;
         }
-        console.log("Bruh6", leftState, rightState, state);
         var thisState = document.getElementById(state);
         thisState.style.fill = this.prevColor;
     }
@@ -356,6 +350,9 @@ class MapChart extends Component {
                 {utilityButtons}
             </div>
             <div id="mapGridContainer">
+                <div id="leftResults">
+                    <p>{this.leftText}</p>
+                </div>
                 <div id="map">
                 <ComposableMap projection="geoAlbersUsa">
                 <Geographies geography={geoUrl}>
@@ -438,9 +435,6 @@ class MapChart extends Component {
                         <input value={this.state.salary} onChange={this.validateNumber} placeholder="Salary Amount" id="salaryInput"/>
                         &nbsp;in {this.selectedState()} is equivalent to a salary of {this.compareSalary()} in {this.compareState()}&nbsp;
                     </p>
-                </div>
-                <div id="leftResults">
-                    <p>{this.leftText}</p>
                 </div>
             </div>
             </>
