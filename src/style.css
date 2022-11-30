@@ -75,6 +75,7 @@
     text-align: center;
     color: #fdf0d5;
     font-family: JosefinSans;
+    padding-bottom: 150px;
 }
 
 #title {
@@ -97,6 +98,7 @@
     border-style: solid;
     border-color: #fdf0d5;
     border-radius: 10px;
+    margin-top: 30px;
 }
 
 .panelButton:active {

@@ -55,8 +55,11 @@ class MapChart extends Component {
         this.leftText = [];
         this.rightText = [];
         this.state = {salary: ''};
+        this.prevColor = COLORS.primary;
         this.validateNumber = this.validateNumber.bind(this);
         this.id.push(null); this.id.push(null); this.geo.push(null); this.geo.push(null);
+
+
     }
 
     clearInfo(){
@@ -64,13 +67,13 @@ class MapChart extends Component {
         this.rightText = "";
         this.x = 0;
         this.setState({salary: ''});
-        this.id.forEach(id => {
-            var index = this.id.indexOf(id);
-            this.geo[index].fill = COLORS.primary;
-            this.id[index] = null;
-            this.geo[index] = null;
-        })
         this.resetMapColors();
+        // this.id.forEach(id => {
+        //     var index = this.id.indexOf(id);
+        //     this.geo[index].fill = COLORS.primary;
+        //     this.id[index] = null;
+        //     this.geo[index] = null;
+        // })
         this.forceUpdate();
     }
 
@@ -89,7 +92,7 @@ class MapChart extends Component {
                     let sum2 = 0;
                     result.forEach(e => {
                         sum2 = e.rent + e.electricity + e.gas + e.water + e.sewer + e.cable + e.internet;
-                        if(sum1 > sum2){
+                        if(sum1 > sum2 && e.name != this.rightText[0]){
                             var thisState = document.getElementById(translate[e.name]);
                             thisState.style.fill = COLORS.secondary;
                         }
@@ -124,16 +127,14 @@ class MapChart extends Component {
                     let sum2 = 0;
                     result.forEach(e => {
                         sum2 = e.rent + e.electricity + e.gas + e.water + e.sewer + e.cable + e.internet;
-                        if(sum1 < sum2){
+                        if(sum1 < sum2 && e.name != this.rightText[0]){
                             var thisState = document.getElementById(translate[e.name]);
                             thisState.style.fill = COLORS.secondaryHighlight;
                         }
                     })
                     this.forceUpdate();
                 },
-                // Note: it's important to handle errors here
-                // instead of a catch() block so that we don't swallow
-                // exceptions from actual bugs in components.
+
                 (error) => {
                     this.setState({
                         isLoaded: true,
@@ -211,11 +212,12 @@ class MapChart extends Component {
 
     display(id, geo) {
         var index; var side;
+        var thisState = document.getElementById(id);
+        thisState.style.fill = COLORS.primaryAccent;
         if (this.x !== 0) {
-            this.resetMapColors();
             if (this.id.includes(id)) {
                 index = this.id.indexOf(id)
-                this.geo[index].fill = COLORS.primary
+                // thisState.style.fill = COLORS.primary;
                 this.id[index] = null;
                 this.geo[index] = null;
                 this.x--;
@@ -225,8 +227,6 @@ class MapChart extends Component {
                 return;
             }
             else if (this.x !== 1) {
-                this.geo[1].fill = COLORS.primary
-                geo.fill = COLORS.primaryAccent
                 this.id[1] = id;
                 this.geo[1] = geo;
                 side = "right";
@@ -235,7 +235,6 @@ class MapChart extends Component {
                 index = this.id.indexOf(null)
                 this.id[index] = id;
                 this.geo[index] = geo;
-                geo.fill = COLORS.primaryAccent
                 this.x++;
                 if (index === 0) {side = "left";}
                 else {side = "right";}
@@ -245,9 +244,9 @@ class MapChart extends Component {
             this.id[0] = id;
             this.geo[0] = geo;
             this.x++;
-            geo.fill = COLORS.primaryAccent
         }
         this.get(side, geo.properties.name);
+        this.resetMapColors();
     }
 
     get(side, name) {
@@ -274,9 +273,6 @@ class MapChart extends Component {
                 this.rightText = displayText;
             }
             },
-            // Note: it's important to handle errors here
-            // instead of a catch() block so that we don't swallow
-            // exceptions from actual bugs in components.
             (error) => {
             this.setState({
                 isLoaded: true,
@@ -284,6 +280,39 @@ class MapChart extends Component {
             });
             }
         )
+    }
+
+    hoverEnter(state) {
+        let leftState = translate[this.leftText[0]]
+        let rightState = translate[this.rightText[0]]
+        if (leftState != undefined && leftState == state) {
+            console.log("Bruh1", leftState, rightState, state);
+            return;
+        }
+        if (rightState != undefined && rightState == state) {
+            console.log("Bruh2", leftState, rightState, state);
+            return;
+        }
+        console.log("Bruh3", leftState, rightState, state);
+        var thisState = document.getElementById(state);
+        this.prevColor = thisState.style.fill;
+        thisState.style.fill = COLORS.primaryHighlight;
+    }
+
+    hoverExit(state) {
+        let leftState = translate[this.leftText[0]]
+        let rightState = translate[this.rightText[0]]
+        if (leftState != undefined && leftState == state) {
+            console.log("Bruh4", leftState, rightState, state);
+            return;
+        }
+        if (rightState != undefined && rightState == state) {
+            console.log("Bruh5", leftState, rightState, state);
+            return;
+        }
+        console.log("Bruh6", leftState, rightState, state);
+        var thisState = document.getElementById(state);
+        thisState.style.fill = this.prevColor;
     }
 
     resetMapColors() {
@@ -297,7 +326,7 @@ class MapChart extends Component {
                     curLeft = this.leftText[0];
                 }
                 if (this.rightText.length > 1){
-                    curRight = this.RightText[0];
+                    curRight = this.rightText[0];
                 }
                 result.forEach(e => {
                     if(e.name !== curLeft && e.name !== curRight){
@@ -324,7 +353,6 @@ class MapChart extends Component {
         return (
             <>
             <div id='sidePanel'>
-                <p id='sidePanelLabel'>Side Panel</p>
                 {utilityButtons}
             </div>
             <div id="mapGridContainer">
@@ -340,12 +368,14 @@ class MapChart extends Component {
                         stroke={COLORS.primaryHighlight}
                         geography={geo}
                         fill={COLORS.primary}
-                        style={{
-                            default: {fill: geo.fill},
-                            hover: {fill: COLORS.primaryHighlight},
-                            pressed: {fill: COLORS.primaryAccent},
-                        }}
+                        // style={{
+                        //     default: {fill: geo.fill},
+                        //     hover: {fill: COLORS.primaryHighlight},
+                        //     pressed: {fill: COLORS.primaryAccent},
+                        // }}
                         onClick={() => this.display(allStates.find(s => s.val === geo.id).id, geo)}
+                        onMouseEnter={() => this.hoverEnter(allStates.find(s => s.val === geo.id).id)}
+                        onMouseLeave={() => this.hoverExit(allStates.find(s => s.val === geo.id).id)}
                     />
                 ))}
                 {geographies.map(geo => {
@@ -365,7 +395,6 @@ class MapChart extends Component {
                         else if (geo.properties.name === "Hawaii") {
                             centroid[0] = -158;
                             centroid[1] = 19.5;
-                            console.log(centroid);
                         }
                     }
                     return (
