@@ -1,6 +1,6 @@
 #mapGridContainer   { font-family: JosefinSansBold; }
-#leftResults        { float: left; width:20%;}
-#rightResults       { float: left; width:20%;}
+#leftResults        { float: left; width:20%; padding-top: 15%;}
+#rightResults       { float: left; width:20%; padding-top: 15%;}
 #salaryComparison   { float: left; width:100%;}
 #map                { float: left; width:60%;}
 
