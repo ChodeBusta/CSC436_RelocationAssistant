@@ -217,7 +217,7 @@ class MapChart extends Component {
         if (this.x !== 0) {
             if (this.id.includes(id)) {
                 index = this.id.indexOf(id)
-                // thisState.style.fill = COLORS.primary;
+                thisState.style.fill = COLORS.primary;
                 this.id[index] = null;
                 this.geo[index] = null;
                 this.x--;
